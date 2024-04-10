@@ -43,7 +43,6 @@ const ResizableLayout = () => {
     addCount: 0,
     updateCount: 0,
   });
-  const [apiCountFetched, setApiCountFetched] = useState(false);
 
   const [filterComponentData, setFilterComponentData] = useState({
     component1: [],
