@@ -24,6 +24,7 @@ export const ModalComponent = ({
     setContent({ ...content, [name]: value });
   };
 
+  console.log(isEditClick, "IsEditClick");
   const handleOnClick = async () => {
     await axios.post(`${BASE_URL}/api/components`, {
       componentId: content.componentId,
@@ -51,7 +52,7 @@ export const ModalComponent = ({
           <br />
 
           <Textarea
-            placeholder="Text Area"
+            placeholder="Description"
             name="textBody"
             value={content.textBody}
             minRows={6}

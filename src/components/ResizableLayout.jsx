@@ -104,7 +104,14 @@ const ResizableLayout = () => {
 
   const handleAdd = (value) => {
     setModalIsOpen(true);
-    setContent({ ...content, componentId: value });
+    setIsEditClick(false);
+    setContent({
+      heading: "",
+      textBody: "",
+      componentId: value,
+    });
+
+    // setContent({ ...content, componentId: value });
   };
 
   const handleEdit = async (data, compId) => {
