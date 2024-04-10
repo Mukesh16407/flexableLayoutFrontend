@@ -24,7 +24,6 @@ export const ModalComponent = ({
     setContent({ ...content, [name]: value });
   };
 
-  console.log(isEditClick, "IsEditClick");
   const handleOnClick = async () => {
     await axios.post(`${BASE_URL}/api/components`, {
       componentId: content.componentId,

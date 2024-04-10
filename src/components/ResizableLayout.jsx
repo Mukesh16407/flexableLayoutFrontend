@@ -38,6 +38,13 @@ const ResizableLayout = () => {
     textBody: "",
     componentId: null,
   });
+
+  const [apiCount, setApiCount] = useState({
+    addCount: 0,
+    updateCount: 0,
+  });
+  const [apiCountFetched, setApiCountFetched] = useState(false);
+
   const [filterComponentData, setFilterComponentData] = useState({
     component1: [],
     component2: [],
@@ -60,6 +67,22 @@ const ResizableLayout = () => {
       setLoading(false);
     }
   };
+
+  const countApiCall = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/components/count`);
+
+      console.log(response?.data, "response");
+    } catch (error) {
+      console.log("Error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    countApiCall();
+  }, [apiCount]);
 
   useEffect(() => {
     getData();
@@ -115,13 +138,14 @@ const ResizableLayout = () => {
   };
 
   const handleEdit = async (data, compId) => {
+    setModalIsOpen(true);
     setContent({
       heading: data.title,
       textBody: data?.description,
       componentId: compId,
     });
     setEditId(data?._id);
-    setModalIsOpen(true);
+
     setIsEditClick(true);
   };
 
