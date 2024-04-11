@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { ResizableBox } from "react-resizable";
-import "react-resizable/css/styles.css";
+// import { ResizableBox } from "react-resizable";
+// import "react-resizable/css/styles.css";
+import { Resizable } from "re-resizable";
 import { ModalComponent } from "./ModalComponent";
 import { Box } from "@mui/material";
 
@@ -10,16 +11,7 @@ import { ComponentLayout } from "./ComponentLayout";
 import { ThirdComponentLayout } from "./ThirdComponentLayout";
 import { Header } from "./Header";
 
-const MIN_WIDTH = 200;
-const MIN_HEIGHT = 200;
-
 const ResizableLayout = () => {
-  const [componentWidths, setComponentWidths] = useState([
-    window.innerWidth * 0.3,
-    window.innerWidth * 0.7,
-    window.innerWidth * 0.97,
-  ]);
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isEditClick, setIsEditClick] = useState(false);
   const [editId, setEditId] = useState("");
@@ -41,12 +33,6 @@ const ResizableLayout = () => {
     component2: [],
     component3: [],
   });
-
-  const handleResize = (index, event, { size }) => {
-    const newComponentWidths = [...componentWidths];
-    newComponentWidths[index] = size.width;
-    setComponentWidths(newComponentWidths);
-  };
 
   const getData = async () => {
     try {
@@ -78,22 +64,6 @@ const ResizableLayout = () => {
   useEffect(() => {
     getData();
   }, [isEditClick, modalIsOpen]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setComponentWidths([
-        window.innerWidth * 0.3,
-        window.innerWidth * 0.7,
-        window.innerWidth * 0.97,
-      ]);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     if (contents.length > 0) {
@@ -161,60 +131,49 @@ const ResizableLayout = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: "100%",
-          height: "100vh",
+          maxWidth: "100%",
+          maxHeight: "100vh",
         }}
       >
         <Box>
           <Header />
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
-          {[0, 1].map((index) => (
-            <ResizableBox
-              key={index}
-              width={componentWidths[index]}
-              height={300}
-              minConstraints={[MIN_WIDTH, MIN_HEIGHT]}
-              onResize={(event, size) => handleResize(index, event, size)}
-              style={{
-                border: "1px solid black",
-                margin: "5px",
-                overflow: "hidden",
-                overflowY: "auto",
-              }}
-            >
-              <ComponentLayout
-                filterComponentData={filterComponentData}
-                handleAdd={handleAdd}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                index={index}
-                loading={loading}
-              />
-            </ResizableBox>
-          ))}
-        </Box>
+        <Box sx={{ marginTop: "2%" }}>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            {[0, 1].map((index) => (
+              <Resizable
+                key={index}
+                defaultSize={{ width: "50%", padding: "10px", height: "100%" }}
+                style={{ border: "1px solid black" }}
+                minWidth={"30%"}
+              >
+                <ComponentLayout
+                  filterComponentData={filterComponentData}
+                  handleAdd={handleAdd}
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                  index={index}
+                  loading={loading}
+                />
+              </Resizable>
+            ))}
+          </Box>
 
-        <ResizableBox
-          width={componentWidths[2]}
-          height={300}
-          minConstraints={[MIN_WIDTH, MIN_HEIGHT]}
-          onResize={(event, size) => handleResize(2, event, size)}
-          style={{
-            border: "1px solid black",
-            margin: "5px",
-            overflow: "hidden",
-            overflowY: "auto",
-          }}
-        >
-          <ThirdComponentLayout
-            filterComponentData={filterComponentData}
-            handleAdd={handleAdd}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            loading={loading}
-          />
-        </ResizableBox>
+          <Resizable
+            defaultSize={{ width: "100%", padding: "10px", height: "auto" }}
+            style={{ border: "1px solid black" }}
+            minWidth={"30%"}
+            minHeight={"30%"}
+          >
+            <ThirdComponentLayout
+              filterComponentData={filterComponentData}
+              handleAdd={handleAdd}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              loading={loading}
+            />
+          </Resizable>
+        </Box>
       </Box>
       {modalIsOpen && (
         <ModalComponent

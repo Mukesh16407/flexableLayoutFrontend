@@ -22,7 +22,7 @@ export const ComponentLayout = ({
   loading,
 }) => {
   return (
-    <Box>
+    <Box sx={{ minHeight: "100%" }}>
       <Box>
         <Typography variant="h6" component="h2" sx={{ marginLeft: "30%" }}>
           Component {index + 1}

@@ -6,11 +6,11 @@ export const Header = () => {
       <Toolbar>
         <Box sx={{ flexGrow: 1 }} />
         <Typography variant="h6" component="div">
-          APIAdd:0
+          Add API Count:0
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <Typography variant="h6" component="div">
-          API Update:0
+          Update API Count:0
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
       </Toolbar>

@@ -21,7 +21,7 @@ export const ThirdComponentLayout = ({
   loading,
 }) => {
   return (
-    <Box>
+    <Box sx={{ height: "100%" }}>
       <Box>
         <Typography variant="h6" component="h2" sx={{ marginLeft: "50%" }}>
           Component 3
