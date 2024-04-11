@@ -80,6 +80,5 @@ ThirdComponentLayout.propTypes = {
   handleAdd: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
 };

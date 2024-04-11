@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { ResizableBox } from "react-resizable";
 import "react-resizable/css/styles.css";
 import { ModalComponent } from "./ModalComponent";
+import { Box } from "@mui/material";
 
 import axios from "axios";
 import { BASE_URL } from "../services/helper";
 import { ComponentLayout } from "./ComponentLayout";
 import { ThirdComponentLayout } from "./ThirdComponentLayout";
+import { Header } from "./Header";
 
 const MIN_WIDTH = 200;
 const MIN_HEIGHT = 200;
@@ -155,15 +157,18 @@ const ResizableLayout = () => {
 
   return (
     <>
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
           flexDirection: "column",
           width: "100%",
           height: "100vh",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <Box>
+          <Header />
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
           {[0, 1].map((index) => (
             <ResizableBox
               key={index}
@@ -188,7 +193,7 @@ const ResizableLayout = () => {
               />
             </ResizableBox>
           ))}
-        </div>
+        </Box>
 
         <ResizableBox
           width={componentWidths[2]}
@@ -210,7 +215,7 @@ const ResizableLayout = () => {
             loading={loading}
           />
         </ResizableBox>
-      </div>
+      </Box>
       {modalIsOpen && (
         <ModalComponent
           setModalIsOpen={setModalIsOpen}
