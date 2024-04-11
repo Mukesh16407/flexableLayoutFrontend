@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
@@ -77,4 +78,14 @@ export const ModalComponent = ({
       </Modal>
     </div>
   );
+};
+
+ModalComponent.propTypes = {
+  modalIsOpen: PropTypes.bool.isRequired,
+  setModalIsOpen: PropTypes.func.isRequired,
+  content: PropTypes.array.isRequired,
+  setContent: PropTypes.func.isRequired,
+  isEditClick: PropTypes.bool.isRequired,
+  handleEditUpdate: PropTypes.func.isRequired,
+  editId: PropTypes.string.isRequired,
 };

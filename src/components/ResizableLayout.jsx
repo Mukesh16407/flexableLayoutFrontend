@@ -1,22 +1,12 @@
 import { useState, useEffect } from "react";
 import { ResizableBox } from "react-resizable";
 import "react-resizable/css/styles.css";
-import Loader from "./Loader";
 import { ModalComponent } from "./ModalComponent";
-import {
-  Box,
-  Button,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+
 import axios from "axios";
 import { BASE_URL } from "../services/helper";
+import { ComponentLayout } from "./ComponentLayout";
+import { ThirdComponentLayout } from "./ThirdComponentLayout";
 
 const MIN_WIDTH = 200;
 const MIN_HEIGHT = 200;
@@ -122,7 +112,7 @@ const ResizableLayout = () => {
         component3: component3Data,
       });
     }
-  }, [contents, filterComponentData]);
+  }, [contents]);
 
   const handleAdd = (value) => {
     setModalIsOpen(true);
@@ -188,62 +178,14 @@ const ResizableLayout = () => {
                 overflowY: "auto",
               }}
             >
-              <Box>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  sx={{ marginLeft: "30%" }}
-                >
-                  Component {index + 1}
-                </Typography>
-                <Stack direction="row" spacing={2} sx={{ marginLeft: "30%" }}>
-                  <Button
-                    variant="outlined"
-                    onClick={() => handleAdd(index + 1)}
-                  >
-                    ADD
-                  </Button>
-                </Stack>
-              </Box>
-              <Box>
-                {loading && <Loader />}
-                <TableContainer>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Todo</TableCell>
-                        <TableCell>Description</TableCell>
-                        <TableCell>Action</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody style={{ overflow: "hidden" }}>
-                      {filterComponentData[`component${index + 1}`]?.map(
-                        (data) => (
-                          <TableRow key={data._id}>
-                            <TableCell>{data.title}</TableCell>
-                            <TableCell>{data.description}</TableCell>
-                            <TableCell>
-                              <Button
-                                variant="outlined"
-                                onClick={() => handleEdit(data, index + 1)}
-                                style={{ marginRight: "5px" }}
-                              >
-                                Edit
-                              </Button>
-                              <Button
-                                variant="outlined"
-                                onClick={() => handleDelete(data._id)}
-                              >
-                                Delete
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        )
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Box>
+              <ComponentLayout
+                filterComponentData={filterComponentData}
+                handleAdd={handleAdd}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                index={index}
+                loading={loading}
+              />
             </ResizableBox>
           ))}
         </div>
@@ -260,55 +202,13 @@ const ResizableLayout = () => {
             overflowY: "auto",
           }}
         >
-          <Box>
-            <Typography variant="h6" component="h2" sx={{ marginLeft: "50%" }}>
-              Component 3
-            </Typography>
-            <Stack direction="row" spacing={2} sx={{ marginLeft: "50%" }}>
-              <Button variant="outlined" onClick={() => handleAdd(3)}>
-                ADD
-              </Button>
-            </Stack>
-          </Box>
-          <div>
-            <Box>
-              {loading && <Loader />}
-              <TableContainer>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Todo</TableCell>
-                      <TableCell>Description</TableCell>
-                      <TableCell>Action</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {filterComponentData.component3?.map((data) => (
-                      <TableRow key={data._id}>
-                        <TableCell>{data.title}</TableCell>
-                        <TableCell>{data.description}</TableCell>
-                        <TableCell>
-                          <Button
-                            variant="outlined"
-                            onClick={() => handleEdit(data, 3)}
-                            style={{ marginRight: "5px" }}
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            onClick={() => handleDelete(data._id)}
-                          >
-                            Delete
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Box>
-          </div>
+          <ThirdComponentLayout
+            filterComponentData={filterComponentData}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            loading={loading}
+          />
         </ResizableBox>
       </div>
       {modalIsOpen && (
