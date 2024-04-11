@@ -24,10 +24,14 @@ export const ComponentLayout = ({
   return (
     <Box sx={{ minHeight: "100%" }}>
       <Box>
-        <Typography variant="h6" component="h2" sx={{ marginLeft: "30%" }}>
+        <Typography variant="h6" component="h2" sx={{ textAlign: "center" }}>
           Component {index + 1}
         </Typography>
-        <Stack direction="row" spacing={2} sx={{ marginLeft: "30%" }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
           <Button variant="outlined" onClick={() => handleAdd(index + 1)}>
             ADD
           </Button>

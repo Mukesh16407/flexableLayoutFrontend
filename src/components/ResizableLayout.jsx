@@ -132,26 +132,30 @@ const ResizableLayout = () => {
   };
 
   return (
-    <>
+    <Box sx={{ width: "100%" }}>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          maxWidth: "100%",
-          maxHeight: "100vh",
+          // maxWidth: "100%",
+          // maxHeight: "100vh",
         }}
       >
         <Box>
           <Header apiCount={apiCount} />
         </Box>
         <Box sx={{ marginTop: "2%" }}>
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Box sx={{ display: "flex", flexDirection: "row", gap: "30px" }}>
             {[0, 1].map((index) => (
               <Resizable
                 key={index}
-                defaultSize={{ width: "50%", padding: "10px", height: "100%" }}
+                defaultSize={{
+                  width: "48%",
+                  padding: "10px",
+                }}
                 style={{ border: "1px solid black" }}
                 minWidth={"30%"}
+                minHeight={"195px"}
               >
                 <ComponentLayout
                   filterComponentData={filterComponentData}
@@ -166,10 +170,10 @@ const ResizableLayout = () => {
           </Box>
 
           <Resizable
-            defaultSize={{ width: "100%", padding: "10px", height: "auto" }}
-            style={{ border: "1px solid black" }}
+            defaultSize={{ padding: "10px" }}
+            style={{ border: "1px solid black", marginTop: "30px" }}
             minWidth={"30%"}
-            minHeight={"30%"}
+            minHeight={"194px"}
           >
             <ThirdComponentLayout
               filterComponentData={filterComponentData}
@@ -191,7 +195,7 @@ const ResizableLayout = () => {
           editId={editId}
         />
       )}
-    </>
+    </Box>
   );
 };
 

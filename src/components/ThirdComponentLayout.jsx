@@ -21,12 +21,16 @@ export const ThirdComponentLayout = ({
   loading,
 }) => {
   return (
-    <Box sx={{ height: "100%" }}>
+    <Box>
       <Box>
-        <Typography variant="h6" component="h2" sx={{ marginLeft: "50%" }}>
+        <Typography variant="h6" component="h2" sx={{ textAlign: "center" }}>
           Component 3
         </Typography>
-        <Stack direction="row" spacing={2} sx={{ marginLeft: "50%" }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
           <Button variant="outlined" onClick={() => handleAdd(3)}>
             ADD
           </Button>
@@ -53,7 +57,6 @@ export const ThirdComponentLayout = ({
                       <Button
                         variant="outlined"
                         onClick={() => handleEdit(data, 3)}
-                        style={{ marginRight: "5px" }}
                       >
                         Edit
                       </Button>
