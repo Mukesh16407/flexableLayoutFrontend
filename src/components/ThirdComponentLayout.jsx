@@ -13,13 +13,13 @@ import {
 } from "@mui/material";
 import Loader from "./Loader";
 
-export const ThirdComponentLayout = (
+export const ThirdComponentLayout = ({
   filterComponentData,
   handleAdd,
   handleEdit,
   handleDelete,
-  loading
-) => {
+  loading,
+}) => {
   return (
     <Box>
       <Box>
@@ -45,7 +45,7 @@ export const ThirdComponentLayout = (
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filterComponentData.component3?.map((data) => (
+                {filterComponentData?.component3?.map((data) => (
                   <TableRow key={data._id}>
                     <TableCell>{data.title}</TableCell>
                     <TableCell>{data.description}</TableCell>
