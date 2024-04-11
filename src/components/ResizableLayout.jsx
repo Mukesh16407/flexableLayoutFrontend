@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 // import { ResizableBox } from "react-resizable";
 // import "react-resizable/css/styles.css";
@@ -28,6 +29,8 @@ const ResizableLayout = () => {
     updateCount: 0,
   });
 
+  console.log(apiCount, "apiCount");
+
   const [filterComponentData, setFilterComponentData] = useState({
     component1: [],
     component2: [],
@@ -38,6 +41,7 @@ const ResizableLayout = () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/components`);
       setContents(response.data.data);
+      countApiCall();
     } catch (error) {
       console.log("Error", error);
     } finally {
@@ -49,17 +53,17 @@ const ResizableLayout = () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/components/count`);
 
-      console.log(response?.data, "response");
+      setApiCount({
+        ...apiCount,
+        addCount: response?.data?.addCount,
+        updateCount: response?.data?.updateCount,
+      });
     } catch (error) {
       console.log("Error", error);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    countApiCall();
-  }, [apiCount]);
 
   useEffect(() => {
     getData();
@@ -84,6 +88,7 @@ const ResizableLayout = () => {
         component3: component3Data,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
 
   const handleAdd = (value) => {
@@ -116,6 +121,7 @@ const ResizableLayout = () => {
       title: content?.heading,
       description: content?.textBody,
     });
+    countApiCall();
     setModalIsOpen(false);
     setIsEditClick(false);
   };
@@ -136,7 +142,7 @@ const ResizableLayout = () => {
         }}
       >
         <Box>
-          <Header />
+          <Header apiCount={apiCount} />
         </Box>
         <Box sx={{ marginTop: "2%" }}>
           <Box sx={{ display: "flex", flexDirection: "row" }}>
