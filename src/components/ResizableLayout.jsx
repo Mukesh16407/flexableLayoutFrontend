@@ -132,20 +132,27 @@ const ResizableLayout = () => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box>
+      <Box>
+        <Header apiCount={apiCount} />
+      </Box>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          // maxWidth: "100%",
-          // maxHeight: "100vh",
+          width: "98%",
+          justifyContent: "center",
         }}
       >
-        <Box>
-          <Header apiCount={apiCount} />
-        </Box>
-        <Box sx={{ marginTop: "2%" }}>
-          <Box sx={{ display: "flex", flexDirection: "row", gap: "30px" }}>
+        <Box sx={{ marginTop: "30px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "30px",
+              justifyContent: "center",
+            }}
+          >
             {[0, 1].map((index) => (
               <Resizable
                 key={index}
@@ -155,7 +162,7 @@ const ResizableLayout = () => {
                 }}
                 style={{ border: "1px solid black" }}
                 minWidth={"30%"}
-                minHeight={"195px"}
+                minHeight={"190px"}
               >
                 <ComponentLayout
                   filterComponentData={filterComponentData}
@@ -170,8 +177,12 @@ const ResizableLayout = () => {
           </Box>
 
           <Resizable
-            defaultSize={{ padding: "10px" }}
-            style={{ border: "1px solid black", marginTop: "30px" }}
+            // defaultSize={{ padding: "10px" }}
+            style={{
+              border: "1px solid black",
+              marginTop: "30px",
+              marginLeft: "15px",
+            }}
             minWidth={"30%"}
             minHeight={"194px"}
           >
